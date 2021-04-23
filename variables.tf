@@ -2,4 +2,6 @@ variable "name" {
   type = string
 }
 
-variable "tags" {}
+variable "tags" {
+  default = {}
+}
