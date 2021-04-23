@@ -18,6 +18,7 @@ The credentials will be **saved** to the *SSM Parameter Store* as follows:
 * /ec2/key-pair/name/private-rsa-key-pem
 * /ec2/key-pair/name/public-rsa-key-pem
 * /ec2/key-pair/name/public-rsa-key-openssh
+  
 *The name is sent in the parameter to the module.*
 
 ## Requirements
@@ -83,6 +84,7 @@ After **installed** and *configured*, run the command:
 ```sh
 aws ssm get-parameter --name "/ec2/key-pair/name/private-rsa-key-pem" --output text --query Parameter.Value >> "~/my-key-pair.pem"
 ```
+
 *The name is sent in the parameter to the ssm module.*
 
 Now you have the **pem** *downloaded*.
