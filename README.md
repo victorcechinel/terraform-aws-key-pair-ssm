@@ -14,11 +14,11 @@ This Terraform module creates the following AWS resources:
   * TLS Public Key (OpenSSH - RSA);
   * TLS Public Key;
 
-The credentials will be saved to the SSM Parameter Store as follows:
-* /ec2/key-pair/<name>/private-rsa-key-pem
-* /ec2/key-pair/<name>/public-rsa-key-pem
-* /ec2/key-pair/<name>/public-rsa-key-openssh
-*The <name> is sent in the parameter to the module.*
+The credentials will be **saved** to the *SSM Parameter Store* as follows:
+* /ec2/key-pair/name/private-rsa-key-pem
+* /ec2/key-pair/name/public-rsa-key-pem
+* /ec2/key-pair/name/public-rsa-key-openssh
+*The name is sent in the parameter to the module.*
 
 ## Requirements
 
@@ -79,13 +79,13 @@ To download credentials via **aws-cli**, you need to have it previously download
 
 To install, go the [official tutorial](https://github.com/aws/aws-cli/tree/v2).
 
-After installed and configured, run the command:
+After **installed** and *configured*, run the command:
 ```sh
-aws ssm get-parameter --name "/ec2/key-pair/<name>/private-rsa-key-pem" --output text --query Parameter.Value >> "~/my-key-pair.pem"
+aws ssm get-parameter --name "/ec2/key-pair/name/private-rsa-key-pem" --output text --query Parameter.Value >> "~/my-key-pair.pem"
 ```
-*The <name> is sent in the parameter to the ssm module.*
+*The name is sent in the parameter to the ssm module.*
 
-Now you have the pem downloaded.
+Now you have the **pem** *downloaded*.
 
 ## Author
 
