@@ -14,6 +14,12 @@ This Terraform module creates the following AWS resources:
   * TLS Public Key (OpenSSH - RSA);
   * TLS Public Key;
 
+The credentials will be saved to the SSM Parameter Store as follows:
+* /ec2/key-pair/<name>/private-rsa-key-pem
+* /ec2/key-pair/<name>/public-rsa-key-pem
+* /ec2/key-pair/<name>/public-rsa-key-openssh
+*The <name> is sent in the parameter to the module.*
+
 ## Requirements
 
 * This module is meant for use with [Terraform](https://www.terraform.io/downloads.html) 0.13+. It has not been tested with previous versions of Terraform.
@@ -29,25 +35,34 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 3.0"
-      region  = "sa-east-1"
-      shared_credentials_file = "~/.aws/credentials"
+    }
+
+    tls = {
+      source  = "hashicorp/tls"
+      version = "~> 3.0"
     }
   }
 }
 
-module "aws_rds_postgres" {
-  source = "victorcechinel/key-pair-ssm/aws"
+provider "aws" {
+  region                  = "sa-east-1"
+  shared_credentials_file = "~/.aws/credentials"
+}
 
+module "aws_rds_postgres" {
+  source  = "victorcechinel/key-pair-ssm/aws"
+  version = "1.0.1"
+  
   name = "key-pair-name"
 }
 ```
 
 ## Inputs
 
-| Name | Description   | Type          | Default | Required |
-| ---- | ------------- | ------------- | ------- | -------- |
-| name | Key Pair name | string        | -       | yes      |
-| tags | Tags          | array(string) | -       | no       |
+| Name | Description   | Type   | Default | Required |
+| ---- | ------------- | ------ | ------- | -------- |
+| name | Key Pair name | string | -       | yes      |
+| tags | Tags          | array  | -       | no       |
 
 ## Outputs
 
@@ -58,9 +73,23 @@ module "aws_rds_postgres" {
 | tls_public_rsa_ssm | TLS Public Key (OpenSSH - RSA) name |
 | tls_public_ssm     | TLS Public Key name                 |
 
+## Download credentials
+
+To download credentials via **aws-cli**, you need to have it previously downloaded and installed.
+
+To install, go the [official tutorial](https://github.com/aws/aws-cli/tree/v2).
+
+After installed and configured, run the command:
+```sh
+aws ssm get-parameter --name "/ec2/key-pair/<name>/private-rsa-key-pem" --output text --query Parameter.Value >> "~/my-key-pair.pem"
+```
+*The <name> is sent in the parameter to the ssm module.*
+
+Now you have the pem downloaded.
+
 ## Author
 
 Module written by [@victorcechinel](https://github.com/victorcechinel). 
 [Linkedin](https://www.linkedin.com/in/victorcechinelr/). 
-Module Support: [terraform-aws-keypair-ssm](https://github.com/victorcechinel/terraform-aws-keypair-ssm). 
+Module Support: [terraform-aws-key-pair-ssm](https://github.com/victorcechinel/terraform-aws-key-pair-ssm). 
 Contributions and comments are welcomed.
