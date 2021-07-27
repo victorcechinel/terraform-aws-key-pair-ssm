@@ -1,7 +1,10 @@
 variable "name" {
-  type = string
+  type        = string
+  description = "Key pair name."
 }
 
 variable "tags" {
-  default = {}
+  type        = map(any)
+  default     = {}
+  description = "Tags map."
 }

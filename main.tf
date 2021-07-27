@@ -1,14 +1,10 @@
-provider "aws" {
-  region = "sa-east-1"
-}
-
 resource "tls_private_key" "tls_key_pair" {
   algorithm = "RSA"
   rsa_bits  = 2048
 }
 
 resource "aws_ssm_parameter" "ssm_key_pair_private_key" {
-  name        = "/ec2/key-pair/${var.name}/private-rsa-key-pem"
+  name        = format("/ec2/key-pair/%s/private-rsa-key-pem", var.name)
   description = "TLS Private Key"
   type        = "String"
   value       = tls_private_key.tls_key_pair.private_key_pem
@@ -19,7 +15,7 @@ resource "aws_ssm_parameter" "ssm_key_pair_private_key" {
 }
 
 resource "aws_ssm_parameter" "ssm_key_pair_private_key_rsa" {
-  name        = "/ec2/key-pair/${var.name}/public-rsa-key-pem"
+  name        = format("/ec2/key-pair/%s/public-rsa-key-pem", var.name)
   description = "TLS Public Key (OpenSSH - RSA)"
   type        = "String"
   value       = tls_private_key.tls_key_pair.public_key_pem
@@ -30,7 +26,7 @@ resource "aws_ssm_parameter" "ssm_key_pair_private_key_rsa" {
 }
 
 resource "aws_ssm_parameter" "ssm_key_pair_public_key" {
-  name        = "/ec2/key-pair/${var.name}/public-rsa-key-openssh"
+  name        = format("/ec2/key-pair/%s/public-rsa-key-openssh", var.name)
   description = "TLS Public Key"
   type        = "String"
   value       = tls_private_key.tls_key_pair.public_key_openssh
