@@ -12,7 +12,7 @@ resource "aws_ssm_parameter" "ssm_key_pair_private_key" {
 
   tags = var.tags
 
-  depends_on  = [
+  depends_on = [
     tls_private_key.tls_key_pair
   ]
 }
@@ -26,7 +26,7 @@ resource "aws_ssm_parameter" "ssm_key_pair_private_key_rsa" {
 
   tags = var.tags
 
-  depends_on  = [
+  depends_on = [
     tls_private_key.tls_key_pair
   ]
 }
@@ -40,7 +40,7 @@ resource "aws_ssm_parameter" "ssm_key_pair_public_key" {
 
   tags = var.tags
 
-  depends_on  = [
+  depends_on = [
     tls_private_key.tls_key_pair
   ]
 }
