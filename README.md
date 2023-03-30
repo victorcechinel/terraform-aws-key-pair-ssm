@@ -2,7 +2,6 @@
 
 ![Terraform Version](https://img.shields.io/badge/tf-%3E%3D1.3-blue.svg) [![MIT Licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://tldrlegal.com/license/mit-license) 
 [![Terraform Validate](https://github.com/victorcechinel/terraform-aws-key-pair-ssm/actions/workflows/validate.yml/badge.svg)](https://github.com/victorcechinel/terraform-aws-key-pair-ssm/actions/workflows/validate.yml)
-[![SonarCloud analysis](https://github.com/victorcechinel/terraform-aws-key-pair-ssm/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/victorcechinel/terraform-aws-key-pair-ssm/actions/workflows/sonarcloud.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=victorcechinel_terraform-aws-key-pair-ssm&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=victorcechinel_terraform-aws-key-pair-ssm)
 
 Terraform Module to create an AWS Key Pair and store credentials on Parameter Store.
