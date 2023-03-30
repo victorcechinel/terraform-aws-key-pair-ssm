@@ -9,9 +9,12 @@ resource "aws_ssm_parameter" "ssm_key_pair_private_key" {
   type        = "String"
   value       = tls_private_key.tls_key_pair.private_key_pem
   overwrite   = true
-  depends_on  = [tls_private_key.tls_key_pair]
 
   tags = var.tags
+
+  depends_on = [
+    tls_private_key.tls_key_pair
+  ]
 }
 
 resource "aws_ssm_parameter" "ssm_key_pair_private_key_rsa" {
@@ -20,9 +23,12 @@ resource "aws_ssm_parameter" "ssm_key_pair_private_key_rsa" {
   type        = "String"
   value       = tls_private_key.tls_key_pair.public_key_pem
   overwrite   = true
-  depends_on  = [tls_private_key.tls_key_pair]
 
   tags = var.tags
+
+  depends_on = [
+    tls_private_key.tls_key_pair
+  ]
 }
 
 resource "aws_ssm_parameter" "ssm_key_pair_public_key" {
@@ -31,15 +37,21 @@ resource "aws_ssm_parameter" "ssm_key_pair_public_key" {
   type        = "String"
   value       = tls_private_key.tls_key_pair.public_key_openssh
   overwrite   = true
-  depends_on  = [tls_private_key.tls_key_pair]
 
   tags = var.tags
+
+  depends_on = [
+    tls_private_key.tls_key_pair
+  ]
 }
 
 resource "aws_key_pair" "key_pair" {
   key_name   = var.name
   public_key = tls_private_key.tls_key_pair.public_key_openssh
-  depends_on = [tls_private_key.tls_key_pair]
 
   tags = var.tags
+
+  depends_on = [
+    tls_private_key.tls_key_pair
+  ]
 }
