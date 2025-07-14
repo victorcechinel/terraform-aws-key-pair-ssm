@@ -1,3 +1,10 @@
+> **⚠️ This repository has been archived and is no longer maintained.**
+>
+> Thank you for your interest in this project. Please note that this repository is now **archived** and **discontinued**.  
+> There are **no recommended alternative solutions** provided or maintained by the author.
+>
+> The content here is for reference only and will not receive further updates, fixes, or support.
+
 # AWS Key Pair SSM
 
 ![Terraform Version](https://img.shields.io/badge/tf-%3E%3D1.3-blue.svg) [![MIT Licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://tldrlegal.com/license/mit-license) 
